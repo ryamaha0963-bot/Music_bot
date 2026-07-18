@@ -1,7 +1,7 @@
 import asyncio
 import yt_dlp
-from pytgcalls import PyTgCalls, StreamType
-from pytgcalls.types import AudioPiped, AudioQuality
+from pytgcalls import PyTgCalls
+from pytgcalls.types import AudioPiped, AudioQuality, StreamType
 from pyrogram import Client as PyroClient
 from utils import time_seconds, control_buttons
 
@@ -91,7 +91,7 @@ class MusicPlayer:
     async def _next(self, chat_id: int):
         self.current[chat_id] = None
         if self.loop.get(chat_id, False):
-            # simple loop – skip for now
+            # Re-add current song (simplified – we skip for now)
             pass
         if not self.queues.get(chat_id):
             await self.app.send_message(chat_id, "⏹️ Queue empty. Leaving...")
